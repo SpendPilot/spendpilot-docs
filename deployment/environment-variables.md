@@ -1,0 +1,53 @@
+# Environment Variables
+
+## Frontend
+
+- `NEXT_PUBLIC_API_BASE_URL`
+- `NEXT_PUBLIC_AUTH_MODE`
+- `NEXT_PUBLIC_ENTRA_FRONTEND_CLIENT_ID`
+- `NEXT_PUBLIC_ENTRA_BACKEND_CLIENT_ID`
+- `NEXT_PUBLIC_ENTRA_BACKEND_AUDIENCE`
+- `NEXT_PUBLIC_ENTRA_API_SCOPE`
+- `NEXT_PUBLIC_ENTRA_AUTHORITY`
+
+## Backend core
+
+- `SERVICE_NAME`
+- `APP_ENV`
+- `DATABASE_URL`
+- `BACKEND_CORS_ORIGINS`
+- `AUTH_MODE`
+- `FINANCE_DEFAULT_CURRENCY`
+
+## Entra and RBAC
+
+- `AZURE_TENANT_ID`
+- `ENTRA_FRONTEND_CLIENT_ID`
+- `ENTRA_BACKEND_CLIENT_ID`
+- `ENTRA_BACKEND_AUDIENCE`
+- `ENTRA_AUTHORITY`
+- `ENTRA_ALLOWED_TENANT_IDS`
+- `PLATFORM_ADMIN_EMAILS`
+
+Notes:
+
+- use `https://login.microsoftonline.com/common` to support both work or school and personal Microsoft accounts
+- `NEXT_PUBLIC_ENTRA_API_SCOPE` must be `<backend Application ID URI>/access_as_user`
+- `PLATFORM_ADMIN_EMAILS` is only for granting platform-admin privileges, not for basic personal-account sign-in
+
+## Dev-only auth
+
+- `DEV_AUTH_SECRET`
+- `DEV_AUTH_DEFAULT_EMAIL`
+- `DEV_AUTH_DEFAULT_NAME`
+- `DEV_AUTH_DEFAULT_ROLE`
+
+## Azure identity and AI
+
+- `AZURE_CLIENT_ID`
+- `AZURE_AI_FOUNDRY_ENDPOINT`
+- `AZURE_AI_PROJECT_ENDPOINT`
+- `AZURE_AI_MODEL_DEPLOYMENT`
+- `AZURE_DOCUMENT_INTELLIGENCE_ENDPOINT`
+- `AZURE_STORAGE_ACCOUNT_URL`
+- `AZURE_STORAGE_CONTAINER_NAME`

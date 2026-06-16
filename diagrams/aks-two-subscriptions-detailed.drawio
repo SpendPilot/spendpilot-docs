@@ -1,0 +1,569 @@
+<mxfile host="app.diagrams.net" modified="2026-06-08T00:00:00.000Z" agent="Codex" version="24.7.17" type="device">
+  <diagram id="nonprod-subscription" name="Non-Prod Subscription">
+    <mxGraphModel dx="1800" dy="1100" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2200" pageHeight="1400" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="np-title" value="Spend Control Platform - Non-Prod Subscription Infrastructure" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontStyle=1;fontSize=22;" vertex="1" parent="1">
+          <mxGeometry x="30" y="20" width="1100" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="np-note" value="Traffic + resource flow view. Styling intentionally matches the older Azure DevOps infrastructure diagram." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="30" y="60" width="520" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="np-sub" value="Non-Prod Subscription&#xa;spend-control-nonprod" style="rounded=1;whiteSpace=wrap;html=1;container=1;recursiveResize=0;fillColor=#f5f5f5;strokeColor=#666666;fontStyle=1;fontSize=18;" vertex="1" parent="1">
+          <mxGeometry x="40" y="120" width="2100" height="1180" as="geometry" />
+        </mxCell>
+        <mxCell id="np-shared" value="Shared Non-Prod Platform Services" style="rounded=1;whiteSpace=wrap;html=1;container=1;recursiveResize=0;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=15;" vertex="1" parent="np-sub">
+          <mxGeometry x="20" y="30" width="2060" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="np-shared1" value="Shared Azure Container Registry&#xa;Dev/staging images" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=13;" vertex="1" parent="np-shared">
+          <mxGeometry x="30" y="35" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="np-shared2" value="CI/CD Platform&#xa;Build + deploy promotion" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=13;" vertex="1" parent="np-shared">
+          <mxGeometry x="290" y="35" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="np-shared3" value="Shared DNS Governance&#xa;dev / staging hostnames" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=13;" vertex="1" parent="np-shared">
+          <mxGeometry x="550" y="35" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="np-shared4" value="Log Analytics / App Insights&#xa;Lower retention than prod" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=13;" vertex="1" parent="np-shared">
+          <mxGeometry x="810" y="35" width="230" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="np-shared5" value="Terraform + Helm&#xa;Shared IaC source of truth" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=13;" vertex="1" parent="np-shared">
+          <mxGeometry x="1080" y="35" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="np-shared6" value="Shared safely in non-prod only&#xa;Build-plane resources can be reused, runtime and data stay environment-specific" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=13;" vertex="1" parent="np-shared">
+          <mxGeometry x="1340" y="28" width="680" height="74" as="geometry" />
+        </mxCell>
+
+        <mxCell id="dev-env" value="Dev Environment&#xa;Resource Group + VNet" style="rounded=1;whiteSpace=wrap;html=1;container=1;recursiveResize=0;fillColor=#e6f7ff;strokeColor=#0b5394;fontStyle=1;fontSize=16;" vertex="1" parent="np-sub">
+          <mxGeometry x="20" y="190" width="980" height="820" as="geometry" />
+        </mxCell>
+        <mxCell id="dev-edge" value="Dev Edge" style="rounded=1;whiteSpace=wrap;html=1;container=1;recursiveResize=0;fillColor=#d9ead3;strokeColor=#6aa84f;fontStyle=1;fontSize=14;" vertex="1" parent="dev-env">
+          <mxGeometry x="20" y="40" width="210" height="270" as="geometry" />
+        </mxCell>
+        <mxCell id="dev-user" value="Developers / Testers" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6aa84f;fontSize=13;" vertex="1" parent="dev-edge">
+          <mxGeometry x="40" y="35" width="130" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="dev-frontdoor" value="Azure Front Door Premium&#xa;WAF + TLS&#xa;dev.myfinagent.online" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6aa84f;fontSize=13;" vertex="1" parent="dev-edge">
+          <mxGeometry x="25" y="95" width="160" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="dev-paths" value="Routes&#xa;/ -> frontend&#xa;/api/* -> APIs" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6aa84f;fontSize=13;" vertex="1" parent="dev-edge">
+          <mxGeometry x="30" y="210" width="150" height="45" as="geometry" />
+        </mxCell>
+
+        <mxCell id="dev-app" value="Dev Application Tier" style="rounded=1;whiteSpace=wrap;html=1;container=1;recursiveResize=0;fillColor=#f4cccc;strokeColor=#cc0000;fontStyle=1;fontSize=14;" vertex="1" parent="dev-env">
+          <mxGeometry x="260" y="40" width="690" height="350" as="geometry" />
+        </mxCell>
+        <mxCell id="dev-gateway" value="AKS Cluster&#xa;kGateway + HTTPRoutes" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#cc0000;fontSize=13;" vertex="1" parent="dev-app">
+          <mxGeometry x="35" y="60" width="160" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="dev-frontend" value="Frontend Service&#xa;Next.js UI" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#cc0000;fontSize=13;" vertex="1" parent="dev-app">
+          <mxGeometry x="245" y="50" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="dev-apis" value="Identity / Finance / Documents APIs&#xa;Lower replica count in dev" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#cc0000;fontSize=13;" vertex="1" parent="dev-app">
+          <mxGeometry x="440" y="40" width="200" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="dev-uami" value="User-Assigned Managed Identity&#xa;AKS Workload Identity" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#cc0000;fontSize=13;" vertex="1" parent="dev-app">
+          <mxGeometry x="220" y="210" width="260" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="dev-app-note" value="Same routing model as prod&#xa;Cheaper size and lower replica profile" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#cc0000;fontSize=13;" vertex="1" parent="dev-app">
+          <mxGeometry x="70" y="210" width="120" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="dev-app-note2" value="Ingress stays public&#xa;Pods and dependencies stay private" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#cc0000;fontSize=13;" vertex="1" parent="dev-app">
+          <mxGeometry x="520" y="210" width="135" height="75" as="geometry" />
+        </mxCell>
+
+        <mxCell id="dev-data" value="Dev Data / Dependency Tier" style="rounded=1;whiteSpace=wrap;html=1;container=1;recursiveResize=0;fillColor=#ead1dc;strokeColor=#a64d79;fontStyle=1;fontSize=14;" vertex="1" parent="dev-env">
+          <mxGeometry x="20" y="430" width="930" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="dev-db" value="PostgreSQL Flexible Server&#xa;Lower-cost dev SKU" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#a64d79;fontSize=13;" vertex="1" parent="dev-data">
+          <mxGeometry x="35" y="55" width="160" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="dev-blob" value="Blob Storage&#xa;Receipts / invoices" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#a64d79;fontSize=13;" vertex="1" parent="dev-data">
+          <mxGeometry x="225" y="55" width="140" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="dev-kv" value="Key Vault&#xa;Dev secrets" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#a64d79;fontSize=13;" vertex="1" parent="dev-data">
+          <mxGeometry x="395" y="55" width="130" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="dev-docint" value="Document Intelligence&#xa;OCR / bill extraction" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#a64d79;fontSize=13;" vertex="1" parent="dev-data">
+          <mxGeometry x="555" y="55" width="150" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="dev-foundry" value="Azure AI Foundry&#xa;Summaries / AI enrichment" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#a64d79;fontSize=13;" vertex="1" parent="dev-data">
+          <mxGeometry x="735" y="55" width="160" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="dev-flow-note" value="Dev flow&#xa;Traffic shape matches prod, but the environment is optimized for speed and cost" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#3c78d8;fontSize=13;" vertex="1" parent="dev-env">
+          <mxGeometry x="220" y="700" width="520" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="stg-env" value="Staging Environment&#xa;Resource Group + VNet" style="rounded=1;whiteSpace=wrap;html=1;container=1;recursiveResize=0;fillColor=#e6f7ff;strokeColor=#0b5394;fontStyle=1;fontSize=16;" vertex="1" parent="np-sub">
+          <mxGeometry x="1040" y="190" width="980" height="820" as="geometry" />
+        </mxCell>
+        <mxCell id="stg-edge" value="Staging Edge" style="rounded=1;whiteSpace=wrap;html=1;container=1;recursiveResize=0;fillColor=#d9ead3;strokeColor=#6aa84f;fontStyle=1;fontSize=14;" vertex="1" parent="stg-env">
+          <mxGeometry x="20" y="40" width="210" height="270" as="geometry" />
+        </mxCell>
+        <mxCell id="stg-user" value="QA / UAT Users" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6aa84f;fontSize=13;" vertex="1" parent="stg-edge">
+          <mxGeometry x="40" y="35" width="130" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="stg-frontdoor" value="Azure Front Door Premium&#xa;WAF + TLS&#xa;staging.myfinagent.online" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6aa84f;fontSize=13;" vertex="1" parent="stg-edge">
+          <mxGeometry x="25" y="95" width="160" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="stg-paths" value="Routes&#xa;/ -> frontend&#xa;/api/* -> APIs" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6aa84f;fontSize=13;" vertex="1" parent="stg-edge">
+          <mxGeometry x="30" y="210" width="150" height="45" as="geometry" />
+        </mxCell>
+
+        <mxCell id="stg-app" value="Staging Application Tier" style="rounded=1;whiteSpace=wrap;html=1;container=1;recursiveResize=0;fillColor=#f4cccc;strokeColor=#cc0000;fontStyle=1;fontSize=14;" vertex="1" parent="stg-env">
+          <mxGeometry x="260" y="40" width="690" height="350" as="geometry" />
+        </mxCell>
+        <mxCell id="stg-gateway" value="AKS Cluster / Namespace&#xa;kGateway + HTTPRoutes" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#cc0000;fontSize=13;" vertex="1" parent="stg-app">
+          <mxGeometry x="35" y="60" width="160" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="stg-frontend" value="Frontend Service&#xa;Release candidate UI" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#cc0000;fontSize=13;" vertex="1" parent="stg-app">
+          <mxGeometry x="245" y="50" width="140" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="stg-apis" value="Identity / Finance / Documents APIs&#xa;Closer-to-prod replicas" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#cc0000;fontSize=13;" vertex="1" parent="stg-app">
+          <mxGeometry x="440" y="40" width="200" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="stg-uami" value="User-Assigned Managed Identity&#xa;AKS Workload Identity" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#cc0000;fontSize=13;" vertex="1" parent="stg-app">
+          <mxGeometry x="220" y="210" width="260" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="stg-app-note" value="Promotion checkpoint&#xa;Validates the prod traffic pattern" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#cc0000;fontSize=13;" vertex="1" parent="stg-app">
+          <mxGeometry x="70" y="210" width="120" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="stg-app-note2" value="Same ingress split as prod&#xa;Frontend and APIs stay behind kGateway" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#cc0000;fontSize=13;" vertex="1" parent="stg-app">
+          <mxGeometry x="520" y="210" width="135" height="75" as="geometry" />
+        </mxCell>
+
+        <mxCell id="stg-data" value="Staging Data / Dependency Tier" style="rounded=1;whiteSpace=wrap;html=1;container=1;recursiveResize=0;fillColor=#ead1dc;strokeColor=#a64d79;fontStyle=1;fontSize=14;" vertex="1" parent="stg-env">
+          <mxGeometry x="20" y="430" width="930" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="stg-db" value="PostgreSQL Flexible Server&#xa;Near-prod schema" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#a64d79;fontSize=13;" vertex="1" parent="stg-data">
+          <mxGeometry x="35" y="55" width="160" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="stg-blob" value="Blob Storage&#xa;Staging documents" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#a64d79;fontSize=13;" vertex="1" parent="stg-data">
+          <mxGeometry x="225" y="55" width="140" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="stg-kv" value="Key Vault&#xa;Staging secrets" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#a64d79;fontSize=13;" vertex="1" parent="stg-data">
+          <mxGeometry x="395" y="55" width="130" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="stg-docint" value="Document Intelligence&#xa;Pre-prod OCR validation" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#a64d79;fontSize=13;" vertex="1" parent="stg-data">
+          <mxGeometry x="555" y="55" width="150" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="stg-foundry" value="Azure AI Foundry&#xa;Pre-prod AI validation" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#a64d79;fontSize=13;" vertex="1" parent="stg-data">
+          <mxGeometry x="735" y="55" width="160" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="stg-flow-note" value="Staging flow&#xa;Release candidates move through the same edge, routing, and dependency model before prod approval" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#3c78d8;fontSize=13;" vertex="1" parent="stg-env">
+          <mxGeometry x="175" y="700" width="610" height="60" as="geometry" />
+        </mxCell>
+
+        <mxCell id="np-controls" value="Non-Prod Isolation / Flow Rules" style="rounded=1;whiteSpace=wrap;html=1;container=1;recursiveResize=0;fillColor=#fce5cd;strokeColor=#b45f06;fontStyle=1;fontSize=15;" vertex="1" parent="np-sub">
+          <mxGeometry x="20" y="1035" width="2060" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="np-ctrl1" value="Both environments stay in the same subscription for cost efficiency" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#b45f06;fontSize=13;" vertex="1" parent="np-controls">
+          <mxGeometry x="25" y="28" width="320" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="np-ctrl2" value="Runtime and data are still split per environment&#xa;No shared dev/staging database or secret store" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#b45f06;fontSize=13;" vertex="1" parent="np-controls">
+          <mxGeometry x="375" y="20" width="360" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="np-ctrl3" value="Managed identity is used for image pulls and resource access instead of embedding app secrets" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#b45f06;fontSize=13;" vertex="1" parent="np-controls">
+          <mxGeometry x="765" y="20" width="420" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="np-ctrl4" value="Traffic shape is the same as prod&#xa;Front Door -> kGateway -> frontend / APIs -> data and AI dependencies" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#b45f06;fontSize=13;" vertex="1" parent="np-controls">
+          <mxGeometry x="1215" y="20" width="380" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="np-ctrl5" value="Staging is the last promotion checkpoint before prod deployment approval" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#b45f06;fontSize=13;" vertex="1" parent="np-controls">
+          <mxGeometry x="1625" y="28" width="400" height="55" as="geometry" />
+        </mxCell>
+
+        <mxCell id="np-e1" value="HTTPS" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;endArrow=block;endFill=1;fontSize=12;" edge="1" parent="dev-env" source="dev-user" target="dev-frontdoor">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="np-e2" value="HTTPS" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;endArrow=block;endFill=1;fontSize=12;" edge="1" parent="dev-env" source="dev-frontdoor" target="dev-gateway">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="np-e3" value="/" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;endArrow=block;endFill=1;fontSize=12;" edge="1" parent="dev-app" source="dev-gateway" target="dev-frontend">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="np-e4" value="/api" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;endArrow=block;endFill=1;fontSize=12;" edge="1" parent="dev-app" source="dev-gateway" target="dev-apis">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="np-e5" value="SQL" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;endArrow=block;endFill=1;fontSize=12;" edge="1" parent="dev-env" source="dev-apis" target="dev-db">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="np-e6" value="files" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;endArrow=block;endFill=1;fontSize=12;" edge="1" parent="dev-env" source="dev-apis" target="dev-blob">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="np-e7" value="OCR / AI" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;endArrow=block;endFill=1;fontSize=12;" edge="1" parent="dev-env" source="dev-apis" target="dev-docint">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="np-e8" value="summaries" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;endArrow=block;endFill=1;fontSize=12;" edge="1" parent="dev-env" source="dev-apis" target="dev-foundry">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="np-e9" value="MI" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#b45f06;endArrow=block;endFill=1;fontSize=12;dashed=1;" edge="1" parent="np-sub" source="dev-uami" target="np-shared1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="np-e10" value="secrets" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#b45f06;endArrow=block;endFill=1;fontSize=12;dashed=1;" edge="1" parent="dev-env" source="dev-uami" target="dev-kv">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="np-e11" value="blob auth" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#b45f06;endArrow=block;endFill=1;fontSize=12;dashed=1;" edge="1" parent="dev-env" source="dev-uami" target="dev-blob">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="np-e12" value="HTTPS" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;endArrow=block;endFill=1;fontSize=12;" edge="1" parent="stg-env" source="stg-user" target="stg-frontdoor">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="np-e13" value="HTTPS" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;endArrow=block;endFill=1;fontSize=12;" edge="1" parent="stg-env" source="stg-frontdoor" target="stg-gateway">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="np-e14" value="/" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;endArrow=block;endFill=1;fontSize=12;" edge="1" parent="stg-app" source="stg-gateway" target="stg-frontend">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="np-e15" value="/api" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;endArrow=block;endFill=1;fontSize=12;" edge="1" parent="stg-app" source="stg-gateway" target="stg-apis">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="np-e16" value="SQL" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;endArrow=block;endFill=1;fontSize=12;" edge="1" parent="stg-env" source="stg-apis" target="stg-db">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="np-e17" value="files" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;endArrow=block;endFill=1;fontSize=12;" edge="1" parent="stg-env" source="stg-apis" target="stg-blob">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="np-e18" value="OCR / AI" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;endArrow=block;endFill=1;fontSize=12;" edge="1" parent="stg-env" source="stg-apis" target="stg-docint">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="np-e19" value="summaries" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;endArrow=block;endFill=1;fontSize=12;" edge="1" parent="stg-env" source="stg-apis" target="stg-foundry">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="np-e20" value="MI" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#b45f06;endArrow=block;endFill=1;fontSize=12;dashed=1;" edge="1" parent="np-sub" source="stg-uami" target="np-shared1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="np-e21" value="secrets" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#b45f06;endArrow=block;endFill=1;fontSize=12;dashed=1;" edge="1" parent="stg-env" source="stg-uami" target="stg-kv">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="np-e22" value="blob auth" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#b45f06;endArrow=block;endFill=1;fontSize=12;dashed=1;" edge="1" parent="stg-env" source="stg-uami" target="stg-blob">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+
+  <diagram id="prod-subscription" name="Prod Subscription">
+    <mxGraphModel dx="1800" dy="1100" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2000" pageHeight="1300" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="prod-title" value="Spend Control Platform - Production Subscription Infrastructure" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontStyle=1;fontSize=22;" vertex="1" parent="1">
+          <mxGeometry x="30" y="20" width="1100" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="prod-note" value="Traffic + resource flow view. Styling intentionally matches the older Azure DevOps infrastructure diagram." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="30" y="60" width="520" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="prod-sub" value="Production Subscription&#xa;spend-control-prod" style="rounded=1;whiteSpace=wrap;html=1;container=1;recursiveResize=0;fillColor=#f5f5f5;strokeColor=#666666;fontStyle=1;fontSize=18;" vertex="1" parent="1">
+          <mxGeometry x="40" y="120" width="1880" height="1080" as="geometry" />
+        </mxCell>
+        <mxCell id="prod-shared" value="Prod Platform Services" style="rounded=1;whiteSpace=wrap;html=1;container=1;recursiveResize=0;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=15;" vertex="1" parent="prod-sub">
+          <mxGeometry x="20" y="30" width="1840" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="prod-shared1" value="Shared ACR Access&#xa;Approved prod image tags only" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=13;" vertex="1" parent="prod-shared">
+          <mxGeometry x="30" y="35" width="230" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="prod-shared2" value="Microsoft Entra ID&#xa;User auth / tenant sign-in" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=13;" vertex="1" parent="prod-shared">
+          <mxGeometry x="300" y="35" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="prod-shared3" value="Log Analytics + App Insights&#xa;Prod diagnostics / telemetry" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=13;" vertex="1" parent="prod-shared">
+          <mxGeometry x="560" y="35" width="230" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="prod-shared4" value="DNS / Certificates&#xa;myfinagent.online + www" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=13;" vertex="1" parent="prod-shared">
+          <mxGeometry x="830" y="35" width="210" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="prod-shared5" value="Terraform + Helm&#xa;AKS deployment source of truth" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=13;" vertex="1" parent="prod-shared">
+          <mxGeometry x="1080" y="35" width="240" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="prod-shared6" value="Dedicated prod runtime and data plane&#xa;Only safe build-plane resources are shared with non-prod" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=13;" vertex="1" parent="prod-shared">
+          <mxGeometry x="1360" y="28" width="450" height="74" as="geometry" />
+        </mxCell>
+
+        <mxCell id="prod-vnet" value="AKS Virtual Network" style="rounded=1;whiteSpace=wrap;html=1;container=1;recursiveResize=0;fillColor=#e6f7ff;strokeColor=#0b5394;fontStyle=1;fontSize=16;" vertex="1" parent="prod-sub">
+          <mxGeometry x="20" y="190" width="1360" height="780" as="geometry" />
+        </mxCell>
+        <mxCell id="prod-edgezone" value="Ingress / Edge Routing Zone" style="rounded=1;whiteSpace=wrap;html=1;container=1;recursiveResize=0;fillColor=#d9ead3;strokeColor=#6aa84f;fontStyle=1;fontSize=14;" vertex="1" parent="prod-vnet">
+          <mxGeometry x="20" y="30" width="250" height="320" as="geometry" />
+        </mxCell>
+        <mxCell id="prod-users" value="Business Users / Admins" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6aa84f;fontSize=13;" vertex="1" parent="prod-edgezone">
+          <mxGeometry x="55" y="30" width="140" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="prod-frontdoor" value="Azure Front Door Premium&#xa;WAF + Bot Protection&#xa;HTTPS only" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6aa84f;fontSize=13;" vertex="1" parent="prod-edgezone">
+          <mxGeometry x="40" y="95" width="170" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="prod-routes" value="Routes&#xa;/ -> frontend&#xa;/api/auth, /api/admin&#xa;/api/finance, /api/documents, /api/ai" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6aa84f;fontSize=13;" vertex="1" parent="prod-edgezone">
+          <mxGeometry x="35" y="215" width="180" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="prod-appzone" value="Application Tier" style="rounded=1;whiteSpace=wrap;html=1;container=1;recursiveResize=0;fillColor=#f4cccc;strokeColor=#cc0000;fontStyle=1;fontSize=14;" vertex="1" parent="prod-vnet">
+          <mxGeometry x="310" y="30" width="540" height="420" as="geometry" />
+        </mxCell>
+        <mxCell id="prod-gateway" value="AKS Cluster&#xa;kGateway + HTTPRoutes" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#cc0000;fontSize=13;" vertex="1" parent="prod-appzone">
+          <mxGeometry x="35" y="55" width="170" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="prod-frontend" value="Frontend Service&#xa;SaaS UI" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#cc0000;fontSize=13;" vertex="1" parent="prod-appzone">
+          <mxGeometry x="250" y="45" width="130" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="prod-apis" value="Identity / Finance / Documents APIs&#xa;Session + RBAC + finance workflows" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#cc0000;fontSize=13;" vertex="1" parent="prod-appzone">
+          <mxGeometry x="405" y="35" width="115" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="prod-mi" value="User-Assigned Managed Identity&#xa;AKS Workload Identity federation" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#cc0000;fontSize=13;" vertex="1" parent="prod-appzone">
+          <mxGeometry x="140" y="220" width="260" height="75" as="geometry" />
+        </mxCell>
+        <mxCell id="prod-pods" value="Multiple replicas&#xa;Frontend / identity / finance / documents" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#cc0000;fontSize=13;" vertex="1" parent="prod-appzone">
+          <mxGeometry x="150" y="335" width="240" height="50" as="geometry" />
+        </mxCell>
+
+        <mxCell id="prod-datazone" value="Data / Dependency Tier" style="rounded=1;whiteSpace=wrap;html=1;container=1;recursiveResize=0;fillColor=#ead1dc;strokeColor=#a64d79;fontStyle=1;fontSize=14;" vertex="1" parent="prod-vnet">
+          <mxGeometry x="310" y="490" width="540" height="230" as="geometry" />
+        </mxCell>
+        <mxCell id="prod-db2" value="PostgreSQL Flexible Server&#xa;GP D2s_v3&#xa;Zone HA + geo-backup" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#a64d79;fontSize=13;" vertex="1" parent="prod-datazone">
+          <mxGeometry x="30" y="55" width="150" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="prod-blob2" value="Blob Storage&#xa;Invoices / receipts" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#a64d79;fontSize=13;" vertex="1" parent="prod-datazone">
+          <mxGeometry x="205" y="55" width="130" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="prod-kv2" value="Key Vault&#xa;Prod secrets" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#a64d79;fontSize=13;" vertex="1" parent="prod-datazone">
+          <mxGeometry x="360" y="55" width="120" height="95" as="geometry" />
+        </mxCell>
+        <mxCell id="prod-docint2" value="Document Intelligence&#xa;Bill extraction" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#a64d79;fontSize=13;" vertex="1" parent="prod-datazone">
+          <mxGeometry x="85" y="170" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="prod-foundry2" value="Azure AI Foundry&#xa;Risk / summary generation" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#a64d79;fontSize=13;" vertex="1" parent="prod-datazone">
+          <mxGeometry x="285" y="170" width="180" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="prod-controlszone" value="Security / Isolation Controls" style="rounded=1;whiteSpace=wrap;html=1;container=1;recursiveResize=0;fillColor=#fce5cd;strokeColor=#b45f06;fontStyle=1;fontSize=15;" vertex="1" parent="prod-sub">
+          <mxGeometry x="1410" y="190" width="450" height="780" as="geometry" />
+        </mxCell>
+        <mxCell id="prod-ctrl1" value="Front Door is the only public ingress" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#b45f06;fontSize=13;" vertex="1" parent="prod-controlszone">
+          <mxGeometry x="25" y="35" width="400" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="prod-ctrl2" value="HTTPS from Front Door to origin&#xa;kGateway receives routed traffic inside AKS" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#b45f06;fontSize=13;" vertex="1" parent="prod-controlszone">
+          <mxGeometry x="25" y="110" width="400" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="prod-ctrl3" value="Managed identity replaces application secrets&#xa;Used for ACR, Storage, and Key Vault access" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#b45f06;fontSize=13;" vertex="1" parent="prod-controlszone">
+          <mxGeometry x="25" y="205" width="400" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="prod-ctrl4" value="Finance tenant isolation happens in the application layer&#xa;Users only access data scoped to their own tenant workspace" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#b45f06;fontSize=13;" vertex="1" parent="prod-controlszone">
+          <mxGeometry x="25" y="300" width="400" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="prod-ctrl5" value="Data plane is prod-only&#xa;PostgreSQL, Blob, Key Vault, AI services are not shared with non-prod" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#b45f06;fontSize=13;" vertex="1" parent="prod-controlszone">
+          <mxGeometry x="25" y="405" width="400" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="prod-ctrl6" value="Observability stays dedicated to prod&#xa;Cleaner RBAC, alerting, and audit boundaries" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#b45f06;fontSize=13;" vertex="1" parent="prod-controlszone">
+          <mxGeometry x="25" y="510" width="400" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="prod-ctrl7" value="Future hardening path&#xa;Private endpoints / private DNS for sensitive prod dependencies" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#b45f06;fontSize=13;" vertex="1" parent="prod-controlszone">
+          <mxGeometry x="25" y="605" width="400" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="prod-bottom" value="Traffic flow summary" style="rounded=1;whiteSpace=wrap;html=1;container=1;recursiveResize=0;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=15;" vertex="1" parent="prod-sub">
+          <mxGeometry x="20" y="995" width="1840" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="prod-bottom1" value="Users authenticate and access the app through Front Door + WAF" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=13;" vertex="1" parent="prod-bottom">
+          <mxGeometry x="25" y="28" width="340" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="prod-bottom2" value="kGateway routes frontend traffic separately from API traffic inside AKS" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=13;" vertex="1" parent="prod-bottom">
+          <mxGeometry x="395" y="28" width="360" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="prod-bottom3" value="APIs use PostgreSQL, Blob Storage, Document Intelligence, and AI Foundry through controlled identities" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=13;" vertex="1" parent="prod-bottom">
+          <mxGeometry x="785" y="20" width="470" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="prod-bottom4" value="The entire runtime path is isolated in the prod subscription" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=13;" vertex="1" parent="prod-bottom">
+          <mxGeometry x="1285" y="28" width="260" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="prod-bottom5" value="Only safe build-plane inputs are shared from outside prod" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=13;" vertex="1" parent="prod-bottom">
+          <mxGeometry x="1575" y="28" width="240" height="55" as="geometry" />
+        </mxCell>
+
+        <mxCell id="prod-e1" value="HTTPS" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;endArrow=block;endFill=1;fontSize=12;" edge="1" parent="prod-edgezone" source="prod-users" target="prod-frontdoor">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="prod-e2" value="HTTPS" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;endArrow=block;endFill=1;fontSize=12;" edge="1" parent="prod-vnet" source="prod-frontdoor" target="prod-gateway">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="prod-e3" value="/" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;endArrow=block;endFill=1;fontSize=12;" edge="1" parent="prod-appzone" source="prod-gateway" target="prod-frontend">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="prod-e4" value="/api" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;endArrow=block;endFill=1;fontSize=12;" edge="1" parent="prod-appzone" source="prod-gateway" target="prod-apis">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="prod-e5" value="auth" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;endArrow=block;endFill=1;fontSize=12;dashed=1;" edge="1" parent="prod-sub" source="prod-frontend" target="prod-shared2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="prod-e6" value="SQL" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;endArrow=block;endFill=1;fontSize=12;" edge="1" parent="prod-vnet" source="prod-apis" target="prod-db2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="prod-e7" value="files" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;endArrow=block;endFill=1;fontSize=12;" edge="1" parent="prod-vnet" source="prod-apis" target="prod-blob2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="prod-e8" value="OCR" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;endArrow=block;endFill=1;fontSize=12;" edge="1" parent="prod-vnet" source="prod-apis" target="prod-docint2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="prod-e9" value="AI" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;endArrow=block;endFill=1;fontSize=12;" edge="1" parent="prod-vnet" source="prod-apis" target="prod-foundry2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="prod-e10" value="secrets" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#b45f06;endArrow=block;endFill=1;fontSize=12;dashed=1;" edge="1" parent="prod-vnet" source="prod-mi" target="prod-kv2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="prod-e11" value="blob auth" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#b45f06;endArrow=block;endFill=1;fontSize=12;dashed=1;" edge="1" parent="prod-vnet" source="prod-mi" target="prod-blob2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="prod-e12" value="image pull" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#b45f06;endArrow=block;endFill=1;fontSize=12;dashed=1;" edge="1" parent="prod-sub" source="prod-mi" target="prod-shared1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+
+  <diagram id="cross-subscription" name="Cross-Subscription Isolation">
+    <mxGraphModel dx="1800" dy="1100" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2200" pageHeight="1400" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="x-title" value="Spend Control Platform - Two-Subscription Promotion and Isolation View" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontStyle=1;fontSize=22;" vertex="1" parent="1">
+          <mxGeometry x="30" y="20" width="1200" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="x-note" value="Shows how non-prod and prod work together without sharing the sensitive runtime or data plane." style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=13;" vertex="1" parent="1">
+          <mxGeometry x="30" y="60" width="500" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="x-shared" value="Cross-Subscription Shared Platform Services" style="rounded=1;whiteSpace=wrap;html=1;container=1;recursiveResize=0;fillColor=#fff2cc;strokeColor=#d6b656;fontStyle=1;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="40" y="120" width="2080" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="x-acr" value="Shared ACR&#xa;Approved images" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=13;" vertex="1" parent="x-shared">
+          <mxGeometry x="30" y="38" width="200" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="x-cicd" value="Shared CI/CD Platform&#xa;Build, test, promote" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=13;" vertex="1" parent="x-shared">
+          <mxGeometry x="270" y="38" width="220" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="x-dns" value="Shared DNS Governance&#xa;Domain ownership and records" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=13;" vertex="1" parent="x-shared">
+          <mxGeometry x="530" y="38" width="230" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="x-code" value="Shared Terraform / Helm Code" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=13;" vertex="1" parent="x-shared">
+          <mxGeometry x="800" y="38" width="210" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="x-boundary" value="Shared build-plane only&#xa;These resources help both environments, but they do not host tenant data or app runtime state" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d6b656;fontSize=13;" vertex="1" parent="x-shared">
+          <mxGeometry x="1050" y="28" width="990" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="x-nonprod" value="Non-Prod Subscription&#xa;spend-control-nonprod" style="rounded=1;whiteSpace=wrap;html=1;container=1;recursiveResize=0;fillColor=#f5f5f5;strokeColor=#666666;fontStyle=1;fontSize=18;" vertex="1" parent="1">
+          <mxGeometry x="40" y="300" width="980" height="820" as="geometry" />
+        </mxCell>
+        <mxCell id="x-np-dev" value="Dev Environment" style="rounded=1;whiteSpace=wrap;html=1;container=1;recursiveResize=0;fillColor=#e6f7ff;strokeColor=#0b5394;fontStyle=1;fontSize=16;" vertex="1" parent="x-nonprod">
+          <mxGeometry x="20" y="40" width="430" height="300" as="geometry" />
+        </mxCell>
+        <mxCell id="x-np-dev-edge" value="Front Door + WAF" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6aa84f;fontSize=13;" vertex="1" parent="x-np-dev">
+          <mxGeometry x="20" y="50" width="120" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="x-np-dev-aks" value="AKS + kGateway" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#cc0000;fontSize=13;" vertex="1" parent="x-np-dev">
+          <mxGeometry x="165" y="50" width="120" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="x-np-dev-data" value="DB + Storage + KV + AI" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#a64d79;fontSize=13;" vertex="1" parent="x-np-dev">
+          <mxGeometry x="305" y="50" width="105" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="x-np-dev-note" value="Lower-cost playground&#xa;Fast validation and experimentation" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#3c78d8;fontSize=13;" vertex="1" parent="x-np-dev">
+          <mxGeometry x="85" y="165" width="260" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="x-np-stg" value="Staging Environment" style="rounded=1;whiteSpace=wrap;html=1;container=1;recursiveResize=0;fillColor=#e6f7ff;strokeColor=#0b5394;fontStyle=1;fontSize=16;" vertex="1" parent="x-nonprod">
+          <mxGeometry x="500" y="40" width="460" height="300" as="geometry" />
+        </mxCell>
+        <mxCell id="x-np-stg-edge" value="Front Door + WAF" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6aa84f;fontSize=13;" vertex="1" parent="x-np-stg">
+          <mxGeometry x="25" y="50" width="130" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="x-np-stg-aks" value="AKS + kGateway" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#cc0000;fontSize=13;" vertex="1" parent="x-np-stg">
+          <mxGeometry x="180" y="50" width="130" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="x-np-stg-data" value="DB + Storage + KV + AI" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#a64d79;fontSize=13;" vertex="1" parent="x-np-stg">
+          <mxGeometry x="335" y="50" width="100" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="x-np-stg-note" value="Release candidate validation&#xa;Last stop before prod approval" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#3c78d8;fontSize=13;" vertex="1" parent="x-np-stg">
+          <mxGeometry x="95" y="165" width="280" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="x-nonprod-isolation" value="Shared inside non-prod only&#xa;Dev and staging can reuse safe build-plane resources, but each keeps its own runtime and data" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=13;" vertex="1" parent="x-nonprod">
+          <mxGeometry x="180" y="420" width="610" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="x-prod" value="Production Subscription&#xa;spend-control-prod" style="rounded=1;whiteSpace=wrap;html=1;container=1;recursiveResize=0;fillColor=#f5f5f5;strokeColor=#666666;fontStyle=1;fontSize=18;" vertex="1" parent="1">
+          <mxGeometry x="1140" y="300" width="980" height="820" as="geometry" />
+        </mxCell>
+        <mxCell id="x-prod-edge2" value="Prod Edge&#xa;Front Door + WAF" style="rounded=1;whiteSpace=wrap;html=1;container=1;recursiveResize=0;fillColor=#d9ead3;strokeColor=#6aa84f;fontStyle=1;fontSize=16;" vertex="1" parent="x-prod">
+          <mxGeometry x="20" y="40" width="220" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="x-prod-edge-box" value="myfinagent.online&#xa;HTTPS only" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#6aa84f;fontSize=13;" vertex="1" parent="x-prod-edge2">
+          <mxGeometry x="35" y="70" width="150" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="x-prod-app2" value="Prod Runtime&#xa;AKS + kGateway + services" style="rounded=1;whiteSpace=wrap;html=1;container=1;recursiveResize=0;fillColor=#f4cccc;strokeColor=#cc0000;fontStyle=1;fontSize=16;" vertex="1" parent="x-prod">
+          <mxGeometry x="280" y="40" width="300" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="x-prod-app-box" value="Frontend / identity / finance / documents&#xa;Managed identity + workload identity" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#cc0000;fontSize=13;" vertex="1" parent="x-prod-app2">
+          <mxGeometry x="40" y="70" width="220" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="x-prod-data2" value="Prod Data Plane&#xa;DB + Storage + KV + AI" style="rounded=1;whiteSpace=wrap;html=1;container=1;recursiveResize=0;fillColor=#ead1dc;strokeColor=#a64d79;fontStyle=1;fontSize=16;" vertex="1" parent="x-prod">
+          <mxGeometry x="620" y="40" width="320" height="250" as="geometry" />
+        </mxCell>
+        <mxCell id="x-prod-data-box" value="PostgreSQL HA + geo-backup&#xa;Blob Storage&#xa;Key Vault&#xa;Document Intelligence / AI Foundry" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#a64d79;fontSize=13;" vertex="1" parent="x-prod-data2">
+          <mxGeometry x="45" y="55" width="230" height="120" as="geometry" />
+        </mxCell>
+
+        <mxCell id="x-prod-isolation" value="Prod is subscription-isolated&#xa;No shared AKS, DB, storage, secrets, or AI runtime with non-prod" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=13;" vertex="1" parent="x-prod">
+          <mxGeometry x="155" y="420" width="660" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="x-controls" value="Isolation and Promotion Rules" style="rounded=1;whiteSpace=wrap;html=1;container=1;recursiveResize=0;fillColor=#fce5cd;strokeColor=#b45f06;fontStyle=1;fontSize=15;" vertex="1" parent="1">
+          <mxGeometry x="40" y="1150" width="2080" height="170" as="geometry" />
+        </mxCell>
+        <mxCell id="x-ctrl1" value="Shared with prod&#xa;ACR, CI/CD, DNS governance, Terraform/Helm code" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#b45f06;fontSize=13;" vertex="1" parent="x-controls">
+          <mxGeometry x="25" y="40" width="300" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="x-ctrl2" value="Never shared with prod&#xa;AKS runtime, PostgreSQL, Blob Storage, Key Vault, managed identity, Front Door runtime" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#b45f06;fontSize=13;" vertex="1" parent="x-controls">
+          <mxGeometry x="355" y="32" width="430" height="96" as="geometry" />
+        </mxCell>
+        <mxCell id="x-ctrl3" value="Promotion model&#xa;Build -> dev -> staging -> manual approval -> prod" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#b45f06;fontSize=13;" vertex="1" parent="x-controls">
+          <mxGeometry x="815" y="40" width="320" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="x-ctrl4" value="Isolation model&#xa;Separate subscription quotas, RBAC, budgets, policies, and blast radius for prod" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#b45f06;fontSize=13;" vertex="1" parent="x-controls">
+          <mxGeometry x="1165" y="40" width="360" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="x-ctrl5" value="Future-ready&#xa;This pattern can expand into multiple prod stamps later without changing the basic ingress model" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#b45f06;fontSize=13;" vertex="1" parent="x-controls">
+          <mxGeometry x="1555" y="32" width="500" height="96" as="geometry" />
+        </mxCell>
+
+        <mxCell id="x-e1" value="image pull" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#b45f06;endArrow=block;endFill=1;fontSize=12;dashed=1;" edge="1" parent="1" source="x-acr" target="x-np-dev-aks">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="x-e2" value="image pull" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#b45f06;endArrow=block;endFill=1;fontSize=12;dashed=1;" edge="1" parent="1" source="x-acr" target="x-np-stg-aks">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="x-e3" value="image pull" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#b45f06;endArrow=block;endFill=1;fontSize=12;dashed=1;" edge="1" parent="1" source="x-acr" target="x-prod-app-box">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="x-e4" value="deploy" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;endArrow=block;endFill=1;fontSize=12;" edge="1" parent="1" source="x-cicd" target="x-np-dev-aks">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="x-e5" value="promote" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;endArrow=block;endFill=1;fontSize=12;" edge="1" parent="1" source="x-cicd" target="x-np-stg-aks">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="x-e6" value="manual approval" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;endArrow=block;endFill=1;fontSize=12;dashed=1;" edge="1" parent="1" source="x-np-stg-aks" target="x-prod-app-box">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="x-e7" value="DNS records" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;endArrow=block;endFill=1;fontSize=12;dashed=1;" edge="1" parent="1" source="x-dns" target="x-np-dev-edge">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="x-e8" value="DNS records" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;endArrow=block;endFill=1;fontSize=12;dashed=1;" edge="1" parent="1" source="x-dns" target="x-np-stg-edge">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="x-e9" value="DNS records" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;strokeColor=#666666;endArrow=block;endFill=1;fontSize=12;dashed=1;" edge="1" parent="1" source="x-dns" target="x-prod-edge-box">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,383 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Spend Control Console Case Study</title>
+  <style>
+    :root {
+      --bg: #f4f6fb;
+      --paper: #ffffff;
+      --ink: #172033;
+      --muted: #5c667a;
+      --line: #d9dfeb;
+      --accent: #0f4c81;
+      --accent-soft: #e8f1f8;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.55;
+    }
+
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 0 auto;
+      padding: 18mm 16mm 18mm;
+      background: var(--paper);
+    }
+
+    h1, h2, h3 {
+      margin: 0 0 10px;
+      line-height: 1.2;
+    }
+
+    h1 {
+      font-size: 28px;
+      letter-spacing: -0.02em;
+    }
+
+    h2 {
+      margin-top: 26px;
+      padding-top: 8px;
+      font-size: 18px;
+      border-top: 1px solid var(--line);
+    }
+
+    h3 {
+      margin-top: 18px;
+      font-size: 14px;
+      color: var(--accent);
+    }
+
+    p {
+      margin: 0 0 10px;
+      font-size: 12px;
+    }
+
+    ul {
+      margin: 8px 0 12px 18px;
+      padding: 0;
+      font-size: 12px;
+    }
+
+    li {
+      margin: 0 0 6px;
+    }
+
+    .hero {
+      padding: 18px 20px;
+      border: 1px solid var(--line);
+      background: linear-gradient(135deg, var(--accent-soft), #ffffff);
+      border-radius: 14px;
+      margin-bottom: 18px;
+    }
+
+    .eyebrow {
+      margin-bottom: 8px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .summary {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin: 16px 0 8px;
+    }
+
+    .card {
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      background: #fbfcff;
+    }
+
+    .card strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+    }
+
+    .card span {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .note {
+      padding: 10px 12px;
+      border-left: 4px solid var(--accent);
+      background: var(--accent-soft);
+      border-radius: 8px;
+      margin: 12px 0;
+      font-size: 12px;
+    }
+
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .footer {
+      margin-top: 28px;
+      padding-top: 12px;
+      border-top: 1px solid var(--line);
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    @media print {
+      body {
+        background: #fff;
+      }
+
+      .page {
+        width: auto;
+        min-height: auto;
+        margin: 0;
+        padding: 14mm 12mm;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <section class="hero">
+      <div class="eyebrow">Case Study</div>
+      <h1>Spend Control Console</h1>
+      <p>Building an AI-assisted enterprise spend governance platform with split services, cloud-ready infrastructure, and production-structured delivery.</p>
+      <div class="summary">
+        <div class="card">
+          <strong>Frontend</strong>
+          <span>Next.js, TypeScript, Tailwind</span>
+        </div>
+        <div class="card">
+          <strong>Backend</strong>
+          <span>FastAPI microservices, PostgreSQL</span>
+        </div>
+        <div class="card">
+          <strong>AI Layer</strong>
+          <span>Ollama with deterministic guardrails</span>
+        </div>
+      </div>
+    </section>
+
+    <h2>Executive Summary</h2>
+    <p>Spend Control Console is a business-centric expense governance platform that helps companies control employee spending, enforce policy, detect anomalies, and support finance teams with AI-assisted explanations and summaries. The system was designed as a production-structured platform rather than a single-app prototype, with separate frontend and service repositories, formal deployment assets, and Azure-ready infrastructure.</p>
+    <p>The platform supports employee claim submission, manager approvals, finance review workflows, deterministic policy checks, anomaly detection, receipt handling groundwork, AI summaries, and multi-environment deployment through local development, Docker Compose, Kubernetes manifests, and Azure infrastructure.</p>
+
+    <h2>Business Problem</h2>
+    <p>Many expense tools are either too simplistic for enterprise governance or too heavyweight to customize and operate easily. The goal of this project was to create a modern internal spend control platform that balances usability, finance policy enforcement, anomaly visibility, and operational extensibility.</p>
+    <p>The product needed to solve for three groups at once:</p>
+    <ul>
+      <li>Employees needed a fast and structured way to submit expenses and upload receipts.</li>
+      <li>Managers needed approval visibility with enough context to make quick decisions.</li>
+      <li>Finance teams needed stronger policy control, dashboarding, auditability, and explainable anomaly review.</li>
+    </ul>
+
+    <h2>Project Goals</h2>
+    <ul>
+      <li>Build a real enterprise expense platform instead of a UI-only demo.</li>
+      <li>Keep service boundaries clean enough for future independent ownership.</li>
+      <li>Use AI as an assistive layer, not as the final policy decision-maker.</li>
+      <li>Support local, Docker Compose, Kubernetes, and Azure deployment paths.</li>
+      <li>Design infrastructure with a realistic production mindset from the beginning.</li>
+      <li>Create an internal UI that feels premium and operational rather than consumer-fintech themed.</li>
+    </ul>
+
+    <h2>Solution Overview</h2>
+    <p>The platform was built around a three-tier architecture:</p>
+    <ul>
+      <li>Presentation layer: Next.js frontend.</li>
+      <li>Service layer: control-service, expense-service, and ai-service.</li>
+      <li>Data/model layer: PostgreSQL and Ollama.</li>
+    </ul>
+    <p>The frontend primarily talks to <code>control-service</code>, which serves as the public API surface and orchestration layer. The control service calls the expense and AI services internally, which keeps the browser-facing contract simpler and more stable.</p>
+
+    <h2>Architecture Design</h2>
+    <div class="two-col">
+      <div>
+        <h3>Frontend</h3>
+        <ul>
+          <li>Next.js App Router</li>
+          <li>TypeScript</li>
+          <li>Tailwind CSS</li>
+          <li>Dashboard-oriented navigation and page structure</li>
+        </ul>
+
+        <h3>Service Layer</h3>
+        <ul>
+          <li><strong>control-service</strong>: auth, RBAC, policy, approvals, summaries, orchestration</li>
+          <li><strong>expense-service</strong>: claims, receipts, budgets, vendors, audit logs</li>
+          <li><strong>ai-service</strong>: explanations, summaries, chat assistant, Ollama integration</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Data and AI</h3>
+        <ul>
+          <li>PostgreSQL with SQLAlchemy and Alembic</li>
+          <li>Ollama for local model serving</li>
+          <li>Pydantic-based settings and contracts</li>
+        </ul>
+
+        <h3>Developer Platform</h3>
+        <ul>
+          <li>Split repositories with a dedicated platform repo</li>
+          <li>Docker Compose layering</li>
+          <li>Kubernetes manifests</li>
+          <li>Terraform for Azure AKS and Azure VM paths</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2>Functional Scope</h2>
+    <ul>
+      <li>Login and role-based access for employee, manager, and finance admin roles.</li>
+      <li>Expense submission with receipt upload.</li>
+      <li>Claim tracking and approval flows.</li>
+      <li>Department and category tagging.</li>
+      <li>Budget and dashboard views.</li>
+      <li>Anomaly inbox for finance review.</li>
+      <li>Audit trail visibility.</li>
+      <li>AI-powered explanations, summaries, and chat assistance.</li>
+    </ul>
+
+    <h2>Policy and Anomaly Strategy</h2>
+    <p>A central design rule was that AI must never make final policy decisions. Deterministic business rules remain the source of truth, while AI is used to explain, summarize, categorize, and assist.</p>
+    <p>Examples of deterministic logic implemented in the platform include:</p>
+    <ul>
+      <li>Receipt required above a configurable threshold.</li>
+      <li>Category-based spend caps.</li>
+      <li>Weekend restrictions for selected categories.</li>
+      <li>Duplicate claim detection.</li>
+      <li>Rounded-amount suspicion flags.</li>
+      <li>Frequent high-value same-vendor anomaly flags.</li>
+      <li>Department over-budget warnings.</li>
+    </ul>
+
+    <h2>Data Model</h2>
+    <p>The project uses a single PostgreSQL instance for simplicity, but service ownership was kept clean so it can evolve into a more distributed model later. Core entities include companies, departments, users, roles, expense claims, receipts, vendors, budgets, policy rules, approval steps, anomalies, audit events, and AI conversation history.</p>
+    <div class="note">The design balances near-term delivery simplicity with longer-term service separation. One database is used operationally, but table ownership and service boundaries were planned with future extraction in mind.</div>
+
+    <h2>Frontend Experience</h2>
+    <p>The UI was designed as a premium B2B internal operations console. The visual direction emphasizes clarity, governance, and business structure rather than playful consumer-finance styling.</p>
+    <ul>
+      <li>Dashboard-oriented layout with left navigation and top context controls.</li>
+      <li>Dedicated pages for login, claims, approvals, anomalies, finance views, budgets, and policies.</li>
+      <li>Clear states for loading, empty, success, and failure conditions.</li>
+      <li>Structured layouts that support both individual employees and finance operators.</li>
+    </ul>
+
+    <h2>Repository and Delivery Evolution</h2>
+    <p>The project began as a monorepo, but was later split into separately managed repositories:</p>
+    <ul>
+      <li>spend-control-platform</li>
+      <li>spend-control-frontend</li>
+      <li>spend-control-control-service</li>
+      <li>spend-control-expense-service</li>
+      <li>spend-control-ai-service</li>
+    </ul>
+    <p>This transition required making each codebase more self-contained, adapting Dockerfiles, standardizing environment handling, and moving infrastructure concerns into the platform repo. The split improved future maintainability and aligned the system more closely with real team ownership patterns.</p>
+
+    <h2>Deployment Strategy</h2>
+    <h3>Local Development</h3>
+    <p>Each service and the frontend can run independently for direct debugging and faster iteration.</p>
+
+    <h3>Docker Compose</h3>
+    <p>Compose was split into three layers to make operational intent clearer:</p>
+    <ul>
+      <li>Infrastructure compose: PostgreSQL and Ollama.</li>
+      <li>Backend compose: control-service, expense-service, ai-service.</li>
+      <li>Frontend compose: Next.js app.</li>
+    </ul>
+
+    <h3>Kubernetes</h3>
+    <p>Plain YAML manifests were created for namespace, config, secrets template, deployments, services, ingress, PVCs, and migration workflows.</p>
+
+    <h2>Azure Infrastructure Design</h2>
+    <p>Two Terraform infrastructure paths were designed:</p>
+    <ul>
+      <li><strong>AKS path</strong> for longer-term Kubernetes-oriented operations.</li>
+      <li><strong>VM-Docker path</strong> for simpler Azure deployment using regular Linux VMs.</li>
+    </ul>
+    <p>The VM-Docker path uses one resource group, one VNet, separate subnets for frontend, backend, and data/AI tiers, and Azure Application Gateway WAF v2 at the edge.</p>
+    <p>At a high level the VM topology is:</p>
+    <ul>
+      <li>One frontend VM</li>
+      <li>One backend VM</li>
+      <li>One data/AI VM for PostgreSQL and Ollama</li>
+    </ul>
+
+    <h2>Major Engineering Challenges</h2>
+    <h3>Cloud Networking Assumptions</h3>
+    <p>A critical issue surfaced when Docker-local hostnames such as <code>postgres</code> and <code>ollama</code> were still being used in Azure VM mode. Those names work in local Docker networking, but they do not resolve across separate Azure VMs. The backend services had to be updated to support full environment overrides so they could use the data VM private IP instead.</p>
+
+    <h3>Terraform App Gateway Association</h3>
+    <p>A plan-time Terraform issue appeared because a resource count depended on apply-time values. This was fixed by introducing an explicit boolean control for Application Gateway backend association, which made the plan deterministic.</p>
+
+    <h3>Azure WAF Configuration Changes</h3>
+    <p>Azure deprecated direct inline WAF configuration in Application Gateway. The implementation was updated to use a standalone WAF policy associated with the gateway.</p>
+
+    <h3>VM SKU and Region Compatibility</h3>
+    <p>Some initially chosen VM sizes were invalid for the selected Azure region, which required reworking the defaults to use accepted SKUs.</p>
+
+    <h3>Bootstrap Reliability</h3>
+    <p>An attempt to extend cloud-init to bootstrap frontend and backend app stacks made the data VM bootstrap unstable. The safe resolution was to restore the simpler and previously working Docker plus Postgres plus Ollama bootstrap for the data VM, rather than keep pushing excessive orchestration into cloud-init.</p>
+
+    <h2>Quality and Verification Work</h2>
+    <p>The delivery included repeated validation across code, infrastructure, and packaging layers. This included:</p>
+    <ul>
+      <li>Terraform validation and formatting.</li>
+      <li>Docker Compose config validation.</li>
+      <li>Backend test execution with pytest.</li>
+      <li>Ruff checks for Python repos.</li>
+      <li>Frontend linting and production build verification.</li>
+      <li>Smoke tests and stale configuration scans.</li>
+    </ul>
+    <p>This validation work mattered because the hardest failures were not syntax problems. They were integration and deployment mismatches between local development assumptions and cloud runtime behavior.</p>
+
+    <h2>Key Decisions That Shaped the Outcome</h2>
+    <ul>
+      <li>AI was kept assistive rather than authoritative.</li>
+      <li>Public browser traffic was kept focused through the control service.</li>
+      <li>Local Docker mode and Azure VM mode were treated as distinct operational environments.</li>
+      <li>Service separation was preserved even while using one PostgreSQL instance initially.</li>
+      <li>Infrastructure was documented and implemented as a first-class concern rather than an afterthought.</li>
+    </ul>
+
+    <h2>Outcome</h2>
+    <p>The result is a realistic enterprise spend platform foundation: modular, cloud-aware, deployment-ready, and structured for future evolution. It provides a strong base for budget enforcement, approval workflows, anomaly review, auditability, and AI-enhanced finance operations.</p>
+    <p>Just as importantly, it captures the kinds of real implementation and infrastructure issues that matter in production projects: service discovery boundaries, bootstrap reliability, deployment mode differences, documentation drift, and environment-specific behavior.</p>
+
+    <h2>Future Roadmap</h2>
+    <ul>
+      <li>Move secrets into Azure Key Vault or a comparable secret store.</li>
+      <li>Add private DNS for VM-to-VM service addressing.</li>
+      <li>Use stronger VM startup orchestration for app services.</li>
+      <li>Improve App Gateway diagnostics and backend probe visibility.</li>
+      <li>Add deeper CI/CD automation for infra validation and deployment.</li>
+      <li>Decide whether VM mode remains primary or becomes a stepping stone to AKS.</li>
+    </ul>
+
+    <div class="footer">
+      Spend Control Console case study generated from the project workspace and delivery history. Prepared as a detailed engineering and architecture narrative.
+    </div>
+  </main>
+</body>
+</html>
