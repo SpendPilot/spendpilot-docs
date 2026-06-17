@@ -21,3 +21,4 @@ Notes:
 
 - Local document uploads store files under `repos/spendpilot-services/data/uploads` when Blob Storage is not configured
 - Backend tests use SQLite and the dev auth mode
+- Local combined development still runs through `repos/spendpilot-services/app.main:app` even though AKS now builds service-specific images from `repos/spendpilot-services/services/`

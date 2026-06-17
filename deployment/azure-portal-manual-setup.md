@@ -133,8 +133,8 @@ If the workstation cannot push images directly because of SSL inspection or Dock
 Recommended path:
 
 1. Push the repo branch to GitHub.
-2. In ACR, create one task for `repos/spendpilot-services/` and one for `repos/spendpilot-frontend/`.
-3. Build `spend-control-backend:latest` and `spend-control-frontend:latest`.
+2. In ACR, create one task for `repos/spendpilot-frontend/` and three service-image tasks for `repos/spendpilot-services/`.
+3. Build `spend-control-identity:latest`, `spend-control-finance:latest`, `spend-control-documents:latest`, and `spend-control-frontend:latest`.
 
 ## In-cluster deployment
 

@@ -5,6 +5,7 @@ When continuing work in this repo:
 - treat this repository as the only supported runtime source
 - preserve the Front Door -> kGateway -> HTTPRoute topology
 - preserve the small 3-service backend split unless there is a strong operational reason to change it
+- preserve the dedicated service folders and service-specific container images under `repos/spendpilot-services/services/`
 - do not reintroduce Kubernetes Ingress as the default path
 - keep Workload Identity and `DefaultAzureCredential` as the preferred Azure auth model
 - update `repos/spendpilot-docs/ai-context/` whenever the runtime shape, auth model, or deployment path changes

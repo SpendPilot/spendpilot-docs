@@ -1,11 +1,11 @@
 # Backend context
 
-The backend is a shared FastAPI codebase with multiple entrypoints:
+The backend is a shared FastAPI package with one combined local app plus three deployable service folders:
 
 - `app.main:app`
-- `app.service_apps.identity:app`
-- `app.service_apps.finance:app`
-- `app.service_apps.documents:app`
+- `services/identity/service_app.py`
+- `services/finance/service_app.py`
+- `services/documents/service_app.py`
 
 Important modules:
 
@@ -18,6 +18,12 @@ Important modules:
 - `app/services/document_service.py`
 - `app/services/ai_foundry_service.py`
 - `app/services/ai_chat_service.py`
+
+Deployable Dockerfiles:
+
+- `services/identity/Dockerfile`
+- `services/finance/Dockerfile`
+- `services/documents/Dockerfile`
 
 Key responsibilities:
 

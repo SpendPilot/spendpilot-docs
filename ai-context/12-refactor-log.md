@@ -26,6 +26,7 @@ Latest major refactor:
 22. added Phase 1 product-refactor identity changes: canonical `org_owner` / `dept_head` / `employee` membership roles, default departments, employee onboarding state, and org-owner membership management guardrails
 23. extended the finance data model and APIs for recurring expenses, recurring requests, spend limits, payment priorities, AI chat sessions, and richer budget / bill linkage
 24. converted the existing frontend into a role-aware payment-operations baseline with org-owner, dept-head, and employee workspaces
+25. converted the backend deployment split from one shared image with runtime `APP_MODULE` overrides into three service folders with dedicated Dockerfiles and image repositories
 
 Intentional simplification kept:
 

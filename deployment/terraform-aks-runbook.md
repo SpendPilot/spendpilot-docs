@@ -159,10 +159,28 @@ Use this path when `az acr build` cannot reach the registry cleanly from the wor
 ```powershell
 az acr task create `
   --registry <acr-name> `
-  --name spend-control-backend-build `
-  --context https://github.com/<org>/<repo>.git#<branch>:backend `
-  --file Dockerfile `
-  --image spend-control-backend:latest `
+  --name spend-control-identity-build `
+  --context https://github.com/<org>/<repo>.git#<branch>:spendpilot-services `
+  --file services/identity/Dockerfile `
+  --image spend-control-identity:latest `
+  --commit-trigger-enabled false `
+  --pull-request-trigger-enabled false
+
+az acr task create `
+  --registry <acr-name> `
+  --name spend-control-finance-build `
+  --context https://github.com/<org>/<repo>.git#<branch>:spendpilot-services `
+  --file services/finance/Dockerfile `
+  --image spend-control-finance:latest `
+  --commit-trigger-enabled false `
+  --pull-request-trigger-enabled false
+
+az acr task create `
+  --registry <acr-name> `
+  --name spend-control-documents-build `
+  --context https://github.com/<org>/<repo>.git#<branch>:spendpilot-services `
+  --file services/documents/Dockerfile `
+  --image spend-control-documents:latest `
   --commit-trigger-enabled false `
   --pull-request-trigger-enabled false
 
@@ -179,11 +197,13 @@ az acr task create `
 2. Trigger both tasks.
 
 ```powershell
-az acr task run --registry <acr-name> --name spend-control-backend-build
+az acr task run --registry <acr-name> --name spend-control-identity-build
+az acr task run --registry <acr-name> --name spend-control-finance-build
+az acr task run --registry <acr-name> --name spend-control-documents-build
 az acr task run --registry <acr-name> --name spend-control-frontend-build
 ```
 
-3. Wait for both runs to succeed, then re-run Terraform with `build_images_during_apply=false`.
+3. Wait for all runs to succeed, then re-run Terraform with `build_images_during_apply=false`.
 
 ## Post-apply verification
 

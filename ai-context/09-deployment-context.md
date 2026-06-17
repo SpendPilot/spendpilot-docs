@@ -14,6 +14,7 @@ Key deployment choices:
 - Azure Blob remote backend for Terraform state
 - Front Door terminates browser HTTPS at the edge and forwards to the gateway over HTTP in the validated path
 - backend is split into `identity`, `finance`, and `documents` services on AKS
+- each backend service now builds from its own folder and Dockerfile under `repos/spendpilot-services/services/`
 - local docker compose stays combined for simplicity
 - kGateway charts are vendored from the official `kgateway-dev/kgateway` `v2.3.0` source tree under `repos/spendpilot-infra/vendor/kgateway/`
 - the app namespace is created by Terraform with `kubernetes_namespace`; the Helm release does not create it
