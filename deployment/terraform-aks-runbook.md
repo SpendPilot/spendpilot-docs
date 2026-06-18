@@ -2,7 +2,7 @@
 
 Validated in Azure on June 8, 2026 against:
 
-- subscription `e1f5b4be-e0ba-4ccb-8708-a949458fcd83`
+- subscription `c00887fb-883e-4d8b-83ba-697054b43421`
 - region `Central India` for AKS, PostgreSQL, Storage, Document Intelligence, and Front Door
 - region `East US 2` for Azure AI Foundry model hosting
 
@@ -60,9 +60,9 @@ terraform init
 
 This stack now uses the Azure Blob remote backend:
 
-- resource group: `terra-rg`
-- storage account: `lijazterracount`
-- container: `terracontainer`
+- resource group: `terraform-rg`
+- storage account: `lijaztf`
+- container: `states`
 - key: `spendpilot.tfstate`
 
 Current workspace model:
@@ -112,8 +112,8 @@ Behavior:
 Live OIDC values:
 
 - client ID: `f2423c6d-2f93-4369-8ed5-b0637b086dcc`
-- tenant ID: `920e9322-340c-4fbc-bf09-dc8fd6636182`
-- subscription ID: `e1f5b4be-e0ba-4ccb-8708-a949458fcd83`
+- tenant ID: `23009888-f985-4438-a6a8-32650f036be3`
+- subscription ID: `c00887fb-883e-4d8b-83ba-697054b43421`
 
 Federated credential subjects:
 

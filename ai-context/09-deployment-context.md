@@ -33,7 +33,7 @@ Live-tested Azure findings from June 8, 2026:
 - Terraform now uses frontend and backend source-tree hashes both to trigger image rebuilds and to force Helm rollouts when source changes
 - the gateway TLS secret can still be created during Terraform apply through Azure CLI plus `kubectl apply`, but it is not required in the default validated Front Door path
 - the storage account defaults to OAuth auth and disables local users, but shared-key auth stays enabled because the current AzureRM provider still expects it for storage-account management
-- the Terraform backend now lives in Azure Blob Storage under `terra-rg` / `lijazterracount` / `terracontainer` / `spendpilot.tfstate`
+- the Terraform backend now lives in Azure Blob Storage under `terraform-rg` / `lijaztf` / `states` / `spendpilot.tfstate`
 - `dev` is the only live Terraform workspace; `default` is intentionally empty and `staging` / `prod` are empty placeholders for future workspace-aware expansion
 - `repos/spendpilot-infra/envs/dev/dev-workspace.ps1` is still the current operator helper, but it is now review-classified because it preserves the old workspace-based flow inside the new env-root layout
 - `.github/workflows/terraform-dev.yml` is the canonical GitHub Actions path for the live environment
