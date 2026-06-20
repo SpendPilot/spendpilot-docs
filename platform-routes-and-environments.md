@@ -31,10 +31,6 @@ Nonprod means the `dev` and `staging` runtime roots plus the shared nonprod rout
 - dev: `dev.costpilot.online`
 - staging: `stage.costpilot.online`
 
-Current rollback/fallback hostname that still matters operationally:
-
-- prod App Gateway fallback: `fin.nexaflow.site`
-
 ## Edge And Routing Model
 
 ### Production
@@ -52,11 +48,6 @@ Target route flow:
 - prod kGateway public LoadBalancer IP
 - in-cluster `Gateway` and `HTTPRoute`
 - frontend and backend services
-
-Current protected fallback:
-
-- Azure Application Gateway remains in place as the working rollback edge
-- the checked-in backend target contract is the prod kGateway public IP `4.247.241.143`
 
 ### Nonprod
 
@@ -87,7 +78,7 @@ Safety rule:
 ## kGateway Dependency
 
 - SpendPilot uses kGateway for in-cluster entry and routing.
-- Azure Front Door and the prod fallback Application Gateway both depend on the environment kGateway public endpoint contract.
+- Azure Front Door depends on the environment kGateway public endpoint contract.
 - Helm now renders HTTPRoute hostnames from `gateway.hostnames` so GitOps environment values control hostname matching.
 
 ## TLS And Custom Domain Requirements
@@ -98,10 +89,6 @@ Safety rule:
 - Validation typically needs Azure-issued TXT records.
 - Managed certificate issuance depends on successful domain validation.
 - Apex handling for `costpilot.online` may require Azure DNS alias support or registrar flattening support depending on where the zone is hosted.
-
-### Application Gateway Fallback
-
-- Prod fallback TLS is still represented through the existing Application Gateway and Key Vault certificate flow for `fin.nexaflow.site`.
 
 ## Expected DNS Records
 
@@ -145,7 +132,6 @@ Likely records:
 4. validate Front Door custom domain and managed certificate readiness
 5. update DNS cutover for `costpilot.online`
 6. validate production through Front Door
-7. keep Application Gateway fallback in place until cutover confidence is high
 
 ## Terraform Plan And Apply Commands
 
@@ -270,11 +256,10 @@ Deployment behavior:
 
 ### Production
 
-- keep the existing Application Gateway path available during Front Door rollout
 - if Front Door validation or cutover fails:
-  - leave DNS on the fallback path
+  - restore DNS to the last known good public edge target
   - revert the Front Door-related Terraform change in git if needed
-  - preserve the current Application Gateway listener, TLS, and backend configuration until rollback is complete
+  - re-run `terraform plan` before any corrective apply
 
 ## Post-Deploy Validation
 
@@ -299,7 +284,6 @@ Deployment behavior:
 - confirm `costpilot.online` resolves to the intended Front Door endpoint
 - confirm requests route to the prod kGateway endpoint
 - confirm `/runtime-config` serves the expected prod auth and API contract
-- confirm the Application Gateway fallback still works until formally retired
 
 ## Database DR Notes
 
