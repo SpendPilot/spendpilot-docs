@@ -35,33 +35,41 @@ Nonprod means the `dev` and `staging` runtime roots plus the shared nonprod rout
 
 ### Production
 
-Target public edge:
+Current managed public edge:
 
 - Azure Front Door
 
-Target route flow:
+Current prod route flow:
 
 - `costpilot.online`
 - Azure Front Door custom domain
 - Azure Front Door route
 - Azure Front Door origin group
-- prod kGateway public LoadBalancer IP
+- prod kGateway public LoadBalancer IP `4.247.241.143`
 - in-cluster `Gateway` and `HTTPRoute`
 - frontend and backend services
 
+Current prod Front Door endpoint:
+
+- `spendpilot-prod-ep-gye0c2fvcbdfbggr.z01.azurefd.net`
+
+Current prod custom-domain validation token:
+
+- `_mmcymzx3c1aepj29766otcgxgcoe2vp`
+
 ### Nonprod
 
-Target shared public edge:
+Current shared public edge:
 
 - Azure Front Door in `spendpilot-infra/envs/nonprod-shared/`
 
-Target route flow:
+Current nonprod route flow:
 
 - `dev.costpilot.online`
 - nonprod Front Door dev custom domain
 - nonprod Front Door dev route
 - nonprod Front Door dev origin group
-- dev kGateway public endpoint
+- dev kGateway public endpoint `4.188.114.237`
 
 and
 
@@ -70,6 +78,15 @@ and
 - nonprod Front Door staging route
 - nonprod Front Door staging origin group
 - staging kGateway public endpoint
+
+Current nonprod Front Door endpoint:
+
+- `spendpilot-nonprod-shared-ep-bgdsacbsfyb9asdr.z01.azurefd.net`
+
+Current nonprod validation tokens:
+
+- `dev.costpilot.online`: `_p1iu3povtjqinzvzll7ta8ekbcdm8v7`
+- `stage.costpilot.online`: `_fh3x68ettyccf5nm62x37u63jdi0cm9`
 
 Safety rule:
 
@@ -126,12 +143,11 @@ Likely records:
 
 ### Prod rollout
 
-1. confirm Azure Front Door quota is available
-2. confirm `costpilot.online` validation records can be created
-3. `prod`
-4. validate Front Door custom domain and managed certificate readiness
-5. update DNS cutover for `costpilot.online`
-6. validate production through Front Door
+1. `prod`
+2. create the required Front Door validation records for `costpilot.online`
+3. validate Front Door custom domain and managed certificate readiness
+4. update DNS cutover for `costpilot.online`
+5. validate production through Front Door from a clean external network path
 
 ## Terraform Plan And Apply Commands
 
@@ -174,8 +190,7 @@ terraform -chdir=spendpilot-infra/envs/prod apply prod.plan
 
 Local workstation note:
 
-- `spendpilot-infra/envs/dev validate` was blocked during this change set by a local Terraform provider checksum/cache mismatch.
-- fix the local provider cache issue before treating a local dev validate failure as a code defect
+- `spendpilot-infra/envs/dev validate` previously hit a local provider checksum/cache mismatch, but the apply path was recovered by aligning the local lockfile with the working Windows provider hashes and re-running init
 
 ## Helm And GitOps Validation Commands
 
@@ -257,9 +272,10 @@ Deployment behavior:
 ### Production
 
 - if Front Door validation or cutover fails:
-  - restore DNS to the last known good public edge target
-  - revert the Front Door-related Terraform change in git if needed
+  - restore or keep DNS on the last known good target
+  - revert the related Front Door Terraform change in git if needed
   - re-run `terraform plan` before any corrective apply
+- because Application Gateway has already been removed, rollback is now DNS and Front Door focused rather than App Gateway fallback focused
 
 ## Post-Deploy Validation
 
@@ -281,14 +297,13 @@ Deployment behavior:
 
 - confirm Azure Front Door custom domain is validated
 - confirm the managed certificate is issued
-- confirm `costpilot.online` resolves to the intended Front Door endpoint
-- confirm requests route to the prod kGateway endpoint
+- confirm `costpilot.online` resolves to `spendpilot-prod-ep-gye0c2fvcbdfbggr.z01.azurefd.net`
+- confirm requests route to the prod kGateway endpoint `4.247.241.143`
 - confirm `/runtime-config` serves the expected prod auth and API contract
 
 ## Database DR Notes
 
-- dev and prod now have a checked-in Terraform DR design for PostgreSQL read replicas in `South India`
-- this DR path was validated syntactically with Terraform, but not applied from this change set
+- dev and prod now have applied Terraform PostgreSQL read replicas in `South India`
 - after apply, validate:
   - replica server exists
   - replica FQDN is output
