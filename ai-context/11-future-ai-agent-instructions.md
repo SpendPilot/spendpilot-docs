@@ -13,6 +13,10 @@ When continuing work in this repo:
 - keep the app namespace bootstrap in Terraform, not inside the app Helm release
 - keep the migration job as a post-install and post-upgrade hook
 - prefer GitHub-backed ACR Tasks when the operator workstation is constrained by SSL interception or Docker restrictions
+- treat prod AKS as a private cluster reached operationally through the Australia ops jumpbox and Azure control-plane workflows
+- do not reintroduce a direct Kubernetes-provider dependency in `repos/spendpilot-infra/envs/prod`
+- preserve the CLI-backed in-place AKS orchestration in prod unless the native Terraform provider can prove no-replacement behavior for the same operations
+- preserve Azure managed Prometheus and Azure Managed Grafana as the default prod observability path
 
 Likely next extensions:
 
